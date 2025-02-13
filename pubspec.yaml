@@ -25,6 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  mesh: ^0.4.2
   
   # Animations
   sprung: ^3.0.1

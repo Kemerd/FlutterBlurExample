@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  cached_value:
+    dependency: transitive
+    description:
+      name: cached_value
+      sha256: "534a6c618e2e891548236c90a3a3ac055dfe4c870efff29719cf28c51ca8b7a5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   characters:
     dependency: transitive
     description:
@@ -213,6 +221,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
+  mesh:
+    dependency: "direct main"
+    description:
+      name: mesh
+      sha256: "55fa011bbe3f2190b6c4b49950f6fa7ca279918f497a88d909a521c5b4b8efc1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.2"
   meta:
     dependency: transitive
     description:

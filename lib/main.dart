@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'frosted_glass.dart';
 import 'glassmorphism_test.dart';
+import 'anim_bg.dart';
 
 void main() {
   runApp(
@@ -23,7 +24,154 @@ class BlurTestApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      home: const BlurTestScreen(),
+      home: const TabTestScreen(),
+    );
+  }
+}
+
+// New TabTestScreen widget to handle tab navigation
+class TabTestScreen extends StatelessWidget {
+  const TabTestScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Blur Tests'),
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: 'Glass Effects'),
+              Tab(text: 'Animated Background'),
+            ],
+          ),
+        ),
+        body: const TabBarView(
+          children: [
+            BlurTestScreen(),
+            AnimatedBgTestScreen(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// New screen for testing AnimatedGradientBackground
+class AnimatedBgTestScreen extends StatefulWidget {
+  const AnimatedBgTestScreen({super.key});
+
+  @override
+  State<AnimatedBgTestScreen> createState() => _AnimatedBgTestScreenState();
+}
+
+class _AnimatedBgTestScreenState extends State<AnimatedBgTestScreen> {
+  double _blurAmount = 5.0;
+  bool _enableMetaballs = false;
+  bool _enableMesh = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          // Animated background
+          AnimatedGradientBackground(
+            enableMetaballs: _enableMetaballs,
+            enableMesh: _enableMesh,
+            blurIntensity: _blurAmount,
+          ),
+
+          // Controls overlay
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: 16,
+            child: Card(
+              color: Colors.black.withOpacity(0.7),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Blur control
+                    Row(
+                      children: [
+                        const SizedBox(
+                            width: 100,
+                            child: Text('Blur:',
+                                style: TextStyle(color: Colors.white))),
+                        Expanded(
+                          child: Slider(
+                            value: _blurAmount,
+                            min: 0,
+                            max: 30,
+                            divisions: 30,
+                            label: _blurAmount.toStringAsFixed(1),
+                            onChanged: (value) {
+                              setState(() {
+                                _blurAmount = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: 50,
+                          child: Text(
+                            _blurAmount.toStringAsFixed(1),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    // Toggle switches
+                    SwitchListTile(
+                      title: const Text('Enable Metaballs',
+                          style: TextStyle(color: Colors.white)),
+                      value: _enableMetaballs,
+                      onChanged: (value) {
+                        setState(() {
+                          _enableMetaballs = value;
+                        });
+                      },
+                    ),
+                    SwitchListTile(
+                      title: const Text('Enable Mesh',
+                          style: TextStyle(color: Colors.white)),
+                      value: _enableMesh,
+                      onChanged: (value) {
+                        setState(() {
+                          _enableMesh = value;
+                        });
+                      },
+                    ),
+
+                    // Trigger animation button
+                    ElevatedButton(
+                      onPressed: () {
+                        AnimatedGradientBackground.triggerAnimation(context);
+                      },
+                      child: const Text('Trigger Animation'),
+                    ),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () {
+                        AnimatedGradientBackground.triggerAnimation(
+                          context,
+                          rainbowFlash: true,
+                        );
+                      },
+                      child: const Text('Trigger Rainbow Flash'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
