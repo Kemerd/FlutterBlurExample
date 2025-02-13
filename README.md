@@ -1,16 +1,40 @@
-# flutter_blurexample
+# Flutter Blur Rendering Test
 
-A new Flutter project.
+A minimal test application to demonstrate blur rendering issues reported in [Flutter issue #162951](https://github.com/flutter/flutter/issues/162951).
 
-## Getting Started
+## Purpose
 
-This project is a starting point for a Flutter application.
+This app provides a simple way to test and demonstrate BackdropFilter blur rendering behavior across different platforms and devices. It features:
 
-A few resources to get you started if this is your first Flutter project:
+- A checkerboard background pattern to make blur effects clearly visible
+- A frosted glass container with adjustable blur intensity
+- A slider to control blur amount from 0-30
+- Device Preview support for testing different screen sizes and devices
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Running the Test
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone this repository
+2. Run `flutter pub get`
+3. Launch on your target platform:
+   ```bash
+   flutter run -d windows  # For Windows
+   flutter run -d macos   # For macOS
+   flutter run -d chrome  # For web
+   ```
+
+## Expected vs Actual Behavior
+
+The app allows testing blur rendering differences between platforms and comparing against expected visual results. Use the slider to adjust blur intensity and observe any rendering artifacts or inconsistencies.
+
+## Related Links
+
+- [Flutter Issue #162951](https://github.com/flutter/flutter/issues/162951)
+- [BackdropFilter Documentation](https://api.flutter.dev/flutter/widgets/BackdropFilter-class.html)
+
+## Contributing
+
+If you observe specific blur rendering issues, please add your findings to the main issue thread with:
+- Your platform/device details
+- Screenshots/video demonstrating the problem
+- Steps to reproduce
+- Any relevant system information
