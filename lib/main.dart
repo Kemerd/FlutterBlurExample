@@ -1,6 +1,8 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'frosted_glass.dart';
+import 'glassmorphism_test.dart';
 
 void main() {
   runApp(
@@ -53,7 +55,7 @@ class _BlurTestScreenState extends State<BlurTestScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Container with blur
+                // Original blur implementation
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: BackdropFilter(
@@ -71,6 +73,64 @@ class _BlurTestScreenState extends State<BlurTestScreen> {
                           color: Colors.white.withOpacity(0.2),
                         ),
                       ),
+                      child: const Center(
+                        child: Text(
+                          'Original Blur',
+                          style: TextStyle(color: Colors.black87),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // Glassmorphic implementation
+                GlassmorphicContainer(
+                  width: double.infinity,
+                  height: 200,
+                  borderRadius: 20,
+                  blur: _blurAmount,
+                  alignment: Alignment.center,
+                  border: 2,
+                  linearGradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.white.withOpacity(0.2),
+                      Colors.white.withOpacity(0.2),
+                    ],
+                  ),
+                  borderGradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Colors.white.withOpacity(0.2),
+                      Colors.white.withOpacity(0.2),
+                    ],
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Glassmorphic Blur',
+                      style: TextStyle(color: Colors.black87),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // FrostedGlass implementation
+                FrostedGlass(
+                  width: double.infinity,
+                  height: 200,
+                  borderRadius: BorderRadius.circular(20),
+                  blurIntensity: _blurAmount,
+                  opacity: 0.2,
+                  enableGlow: false,
+                  child: const Center(
+                    child: Text(
+                      'FrostedGlass Blur',
+                      style: TextStyle(color: Colors.black87),
                     ),
                   ),
                 ),
