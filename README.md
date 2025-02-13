@@ -20,11 +20,14 @@ This app provides a simple way to test and demonstrate BackdropFilter blur rende
    flutter run -d windows  # For Windows
    flutter run -d macos   # For macOS
    flutter run -d chrome  # For web
+   flutter run -d ios # For iOS
    ```
 
 ## Expected vs Actual Behavior
 
 The app allows testing blur rendering differences between platforms and comparing against expected visual results. Use the slider to adjust blur intensity and observe any rendering artifacts or inconsistencies.
+
+When using iOS 18 on an iPhone 16 Pro Max, the blur strength is significantly weaker than Windows.
 
 ## Related Links
 
